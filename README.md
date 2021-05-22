@@ -54,7 +54,8 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 The machines on the internal network are not exposed to the public Internet. 
 
 Only the jumpbox machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _My Ip Adress  which can be found from https://whatismyipaddress.com/
+
+- My Ip Adress which can be found by launching https://whatismyipaddress.com/ from personal laptop/workstation
 
 Machines within the network can only be accessed from the jumpbox which also houses the docker container code and the ansible provisioner.
 
@@ -62,12 +63,15 @@ Machines within the network can only be accessed from the jumpbox which also hou
 
 A summary of the access policies in place can be found in the table below.
 
-| Name       | Publicly Accessible | Allowed IP Address |
-|------------|---------------------|:------------------:|
-| Jumpbox    | Yes                 | 10.0.0.4           |
-| Web 1      | No                  | 10.0.0.5           |
-| Web 2      | No                  | 10.0.0.6           |
-| Elk Server | Yes Port 5601       | 10.1.0.4           |
+| Name         | Publicly Accessible | Allowed IP Address |
+|--------------|---------------------|:------------------:|
+| Jumpbox      | Yes                 | My Ip Address      |
+| Loadbalancer | Yes Port 80         | My Ip Address      |
+| Web 1        | No                  | 10.0.0.5           |
+| Web 2        | No                  | 10.0.0.6           |
+| Elk Server   | Yes Port 5601       | My Ip Address      |
+
+
 
 ### Elk Configuration
 
@@ -79,6 +83,57 @@ Ansible was used to automate configuration of the ELK machine. No configuration 
 
 The playbook implements the following tasks:
 - Installs docker.io, pip3, and the docker module.
+```bash
+  # Use apt module
+    - name: Install docker.io
+      apt:
+        update_cache: yes
+        name: docker.io
+        state: present
+
+  # Use apt module
+    - name: Install pip3
+      apt:
+        force_apt_get: yes
+        name: python3-pip
+        state: present
+
+  # Use pip module
+    - name: Install Docker python module
+      pip:
+        name: docker
+        state: present
+```   
+- increases the virtual memory (for the virtual machine we will use to run the ELK server)
+```bash
+  # Use command module
+    - name: Increase virtual memory
+      command: sysctl -w vm.max_map_count=262144
+```
+- uses sysctl module
+```bash
+  # Use sysctl module
+    - name: Use more memory
+      sysctl:
+        name: vm.max_map_count
+        value: "262144"
+        state: present
+        reload: yes
+```
+- downloads and launches the docker container for elk server 
+```bash
+# Use docker_container module
+    - name: download and launch a docker elk container
+      docker_container:
+        name: elk
+        image: sebp/elk:761
+        state: started
+        restart_policy: always
+        published_ports:
+          - 5601:5601
+          - 9200:9200
+          - 5044:5044
+```
 - increases the virtual memory for the virtual machine we will use to run the ELK server
 - uses sysctl module
 - downloads and launches the docker container for elk server
@@ -113,7 +168,7 @@ SSH into the control node and follow the steps below:
 - Creating the Filebeat Configuration File filebeat-config.yml.Replace the IP address with the IP address of your ELK machine. 
 output.elasticsearch:
 
-  hosts: ["10.1.0.4:9200"]
+  hosts: "10.1.0.4:9200"
   username: "elastic"
   password: "changeme"
 
@@ -127,4 +182,3 @@ output.elasticsearch:
 - Run the playbook ansible-playbook filebeat-playbook.yml, then navigate to http://[Elk_VM_Public_IP]:5601/app/kibana to confirm that the installation worked as expected.
 
 
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
