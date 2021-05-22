@@ -136,12 +136,9 @@ The playbook implements the following tasks:
           - 5601:5601
           - 9200:9200
           - 5044:5044
-
-
-
+          
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
-
-![Docker PS Output](Images/docker_ps_output.png)
+![Docker Output Diagram](Images/dockerps.png)
 
 ### Target Machines & Beat
 This ELK server is configured to monitor the following machines:
