@@ -136,8 +136,17 @@ The playbook implements the following tasks:
           - 5601:5601
           - 9200:9200
           - 5044:5044
-          
+                   
 ```
+
+```bash
+ # Use systemd module
+    - name: Enable service docker on boot
+      systemd:
+        name: docker
+        enabled: yes
+        
+   ```
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 ![Docker Output Diagram](Images/dockerps.png)
 
