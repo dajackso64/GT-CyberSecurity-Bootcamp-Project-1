@@ -40,7 +40,7 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
 -  Metricbeat is a lightweight shipper that you can install on your servers to periodically collect metrics from the operating system and from services running on the server. 
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
+
 
 | Name       | Function   | IP Address | Operating System          |   |
 |------------|------------|------------|---------------------------|---|
@@ -143,7 +143,7 @@ The following screenshot displays the result of running `docker ps` after succes
 
 ![Docker PS Output](Images/docker_ps_output.png)
 
-### Target Machines & Beats
+### Target Machines & Beat
 This ELK server is configured to monitor the following machines:
 
 - Web 1 - 10.0.0.5
