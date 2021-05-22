@@ -4,13 +4,14 @@ The files in this repository were used to configure the network depicted below.
 
 ![Red Team Network Diagram](Images/CyberSecurityProject.png)
 
+
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the .yml file may be used to install only certain pieces of it, such as Filebeat.
 
 The following ansible-playbooks are needed to create and install DVWA and the ELK-server
 
   - pentest.yml - used to install DVWA on webserverss
   - install-elk.yml -used to install ELK server
-    - filebeat-playbook.yml - Used to install and configure Filebeat on Elk Server and DVWA servers
+    - filebeat-playbook.yml - Use to install and configure Filebeat on Elk Server and DVWA servers
     - metricbeat-playbook.yml - Used to install and configure Metricbeat on Elk Server and DVWA servers
 
 
