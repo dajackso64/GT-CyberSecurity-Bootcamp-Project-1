@@ -71,8 +71,7 @@ A summary of the access policies in place can be found in the table below.
 | Web 2        | No                  | 10.0.0.6           |
 | Elk Server   | Yes Port 5601       | My Ip Address      |
 
-The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
-![Docker Output Diagram](Images/dockerps.png)
+
 
 ### Elk Configuration
 
@@ -138,6 +137,9 @@ The playbook implements the following tasks:
           - 9200:9200
           - 5044:5044
           
+```
+The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
+![Docker Output Diagram](Images/dockerps.png)
 
 ### Target Machines & Beat
 This ELK server is configured to monitor the following machines:
