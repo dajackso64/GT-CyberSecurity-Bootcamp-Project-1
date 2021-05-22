@@ -122,6 +122,9 @@ The playbook implements the following tasks:
 ```
 - downloads and launches the docker container for elk server 
 ```bash
+
+
+
 # Use docker_container module
     - name: download and launch a docker elk container
       docker_container:
@@ -133,10 +136,6 @@ The playbook implements the following tasks:
           - 5601:5601
           - 9200:9200
           - 5044:5044
-```
-- increases the virtual memory for the virtual machine we will use to run the ELK server
-- uses sysctl module
-- downloads and launches the docker container for elk server
 
 
 
@@ -175,7 +174,7 @@ output.elasticsearch:
   setup.kibana:
   host: "10.1.0.4:5601"
 
-  Copy the configuration file to /etc/ansible/files
+- Copy the configuration file to /etc/ansible/files
 
 - Creating Filebeat Installation Playbook - /etc/ansible/filebeat-playbook.yml. The playbook installs the code and sets the filebeat system settings.
 
